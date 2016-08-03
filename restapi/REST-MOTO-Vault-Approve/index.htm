@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>SPS REST API Sample</title>
+    </head>
+
+    <!--
+    
+        DESCRIPTION:
+            This is a sample integration to the Sage Payment Solutions REST API.
+            The API exposes a set of gateway functionality, while allowing
+            the integrator to use their own UIs to collect the customer's data.
+        
+        TECHNICAL:
+            This was created on a Linux server running PHP version 5.5.16.
+            Your PHP installation will need cURL and SimpleXML enabled.
+            Call phpinfo() to see information about your configuration.
+        
+        SUPPORT:
+            I've done my best to add comments throughout these files. That said, it is 
+            not possible to exhaustively anticipate and address every potential scenario 
+            that may arise! Please email sdksupport@sage.com for assistance integrating to 
+            the REST API, or any other questions involving third-party integrations to the 
+            Sage Payment Solutions gateway. Any code snippets, logs, responses, etc. 
+            that you can provide make troubleshooting much easier, and are appreciated.
+        
+        TERMS OF USE:
+            This sample was created for demonstrative purposes only. Please do not provide
+            these files, their content, Web Service documentation, or any other relevant material 
+            to any parties not directly involved with your integration.
+
+    -->
+
+    <body>
+    
+        <h3>Customer Information:</h3>
+
+        <!--
+            There's nothing particularly interesting happening here -- just a typical HTML form 
+            collecting customer information and passing it on.
+        -->
+
+        <form method="POST" action="request.php">
+            <label>First Name: <input type="text" name="FirstName" value="Joe"></label><br />
+            <label>Last Name: <input type="text" name="LastName" value="Cuervo"></label><br />
+            <label>Address Line 1: <input type="text" name="AddressLine1" value="123 Main St."></label><br />
+            <label>Address Line 2: <input type="text" name="AddressLine2" value="Suite 1"></label><br />
+            <label>City: <input type="text" name="City" value="Paterson"></label><br />
+            <label>State: <input type="text" name="State" value="NJ"></label><br />
+            <label>Country: <input type="text" name="Country" value="USA"></label><br />
+            <label>Zip: <input type="text" name="Zip" value="07524"></label><br />
+            <label>Email: <input type="email" name="Email" value="test@example.com"></label><br />
+            <label>Telephone: <input type="tel" name="Telephone" value="999-555-1234"></label><br />
+        <h3>Credit Card Information:</h3>
+            <label>Cardnumber: <input type="text" name="CC" value="4111111111111111"></label><br />
+            <label>Expiration: <input type="text" name="Exp" value="1220"></label><br />
+            <label>CVV: <input type="text" name="CVV" value="123"></label><br /><br />
+            <label>Amount: <input type="text" name="Amt" value="1.00"></label><br /><br />
+            <input type="submit" value="Submit" /><br />
+        </form>
+        
+    </body>
+</html>

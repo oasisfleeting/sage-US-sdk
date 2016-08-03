@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>SPS REST API Sample</title>
+    </head>
+
+    <!--
+    
+        DESCRIPTION:
+            This is a sample integration to the Sage Payment Solutions REST API.
+            The API exposes a set of gateway functionality, while allowing
+            the integrator to use their own UIs to collect the customer's data.
+        
+        TECHNICAL:
+            This was created on a Linux server running PHP version 5.5.16.
+            Your PHP installation will need cURL and SimpleXML enabled.
+            Call phpinfo() to see information about your configuration.
+        
+        SUPPORT:
+            I've done my best to add comments throughout these files. That said, it is 
+            not possible to exhaustively anticipate and address every potential scenario 
+            that may arise! Please email sdksupport@sage.com for assistance integrating to 
+            the REST API, or any other questions involving third-party integrations to the 
+            Sage Payment Solutions gateway. Any code snippets, logs, responses, etc. 
+            that you can provide make troubleshooting much easier, and are appreciated.
+        
+        TERMS OF USE:
+            This sample was created for demonstrative purposes only. Please do not provide
+            these files, their content, Web Service documentation, or any other relevant material 
+            to any parties not directly involved with your integration.
+
+    -->
+
+    <body>
+    
+        <h3>Customer Information:</h3>
+
+        <!--
+            There's nothing particularly interesting happening here -- just a typical HTML form 
+            collecting customer information and passing it on.
+        -->
+
+        <form method="POST" action="request.php">
+            <label>First Name: <input type="text" name="FirstName" value="Joe"></label><br />
+            <label>Last Name: <input type="text" name="LastName" value="Cuervo"></label><br />
+            <label>Address Line 1: <input type="text" name="AddressLine1" value="123 Main St."></label><br />
+            <label>Address Line 2: <input type="text" name="AddressLine2" value="Suite 1"></label><br />
+            <label>Zip: <input type="text" name="Zip" value="07524"></label><br />
+        <h3>Credit Card Information:</h3>
+            <label>Cardnumber: <input type="text" name="CC" value=""></label><br /><br />
+            <label><div class="form_right">Exp. Month:<select name="ddlExp_month" id="ddlExp_month" class="text_in">
+	<option value="01">01</option>
+	<option value="02">02</option>
+	<option value="03">03</option>
+	<option value="04">04</option>
+	<option value="05">05</option>
+	<option value="06">06</option>
+	<option value="07">07</option>
+	<option value="08">08</option>
+	<option value="09">09</option>
+	<option value="10">10</option>
+	<option value="11">11</option>
+	<option value="12">12</option>
+</select>&nbsp;
+   Year:
+   <select name="ddLExp_year" id="ddLExp_year" class="text_in">
+	<option value="15">2015</option>
+	<option value="16">2016</option>
+	<option value="17">2017</option>
+	<option value="18">2018</option>
+	<option value="19">2019</option>
+	<option value="20">2020</option>
+</select>
+   </div>
+</label><br />
+            <label>CVV: <input type="text" name="CVV" value=""></label><br /><br />
+            <label>Card Present (true or false): <input type="text" name="CrdPrsnt" value="true"></label><br /><br />
+            <label>Trackdata Format (1=Magetk Encrypted / 0=Clear Text): <input type="text" name="TrkFrmt" value="1"></label><br /><br />
+            <label>Swipe Card: <input type="text" name="TrkData" value=""></label><br /><br />
+            <label>Authorization Code (Required for Force transactions): <input type="text" name="Auth" value=""></label><br /><br />
+            <label>Amount: <input type="text" name="Amt" value="1.00"></label><br /><br />
+            <input type="submit" value="Submit" /><br />
+        </form>
+        
+    </body>
+</html>

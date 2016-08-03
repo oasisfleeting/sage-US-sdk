@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>SPS REST API Sample</title>
+    </head>
+
+    <body>
+    
+        <h3>PUT Request - Capture (Prior Auth Sale):</h3>
+
+        <form method="POST" action="request.php">
+            
+            <label>Transaction Reference Number: <input type="text" name="Ref" size="10" value="" /></label><br /><br />
+            <label>*Leave the value at "0.00" if you wanty to capture the existing pre-auth amount.</label><br />
+            <label>Capture Amount: <input type="text" size="10" name="Amt" value="0.00" /></label><br />
+            <label>Capture Tax Amount: <input type="text" name="Tax" size="10" value="0.00" /></label><br /><br />
+
+            <input type="submit" value="Submit" /><br />
+        </form>
+        
+    </body>
+</html>

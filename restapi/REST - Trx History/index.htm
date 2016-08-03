@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>SPS REST API Sample</title>
+    </head>
+
+    <body>
+    
+        <h3>Transaction Search:</h3>
+
+        <!--
+            There's nothing particularly interesting happening here -- just a typical HTML form 
+            collecting transaction information and passing it on.
+        -->
+
+        <form method="POST" action="request.php">
+            <label>Customer Name: <input type="text" name="CustName" value=""></label><br /><br />
+            <label>Start Date (Required): <input id='date' type='date' name='StrtDt'></label><br /><br />
+            <label>End Date (Required): <input id='date' type='date' name='EndDt'></label><br /><br />
+            <!--
+            *Removed the "Amount" field and string in the XML to conduct a search by name and date.
+        
+            <label>Amount: <input type="text" name="Amt" value=""></label><br /><br />
+            
+            *include the below string in the XML request if you don't want to search by name and use an amount instead.
+                <Amount>' . $_POST['Amt'] . '</Amount>
+            -->
+            <label>Include Details (true or false): <select size="1" name="InclDetails">
+                                                        <option selected>true</option>
+                                                        <option>false</option>
+                                                    </select></label><br /><br />
+            <label>Order Number: <input type="text" name="OrdNum" value=""></label><br /><br />
+            <label>Reference: <input type="text" name="Ref" value=""></label><br /><br />
+            <label>Status Changed (true or false): <select size="1" name="StatChng"></label><br /><br />
+                                                        <option selected>false</option>
+                                                        <option>true</option>
+                                                    </select></label><br /><br />
+            <label>Page Number: <input type="text" name="PgNum" value="1"></label><br /><br />
+            <label>PageSize: <input type="text" name="PgSize" value="10"></label><br /><br />
+            <input type="submit" value="Submit" /><br />
+        </form>
+        
+    </body>
+</html>
