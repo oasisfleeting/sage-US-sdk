@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>SPS Web Services Sample</title>
+    </head>
+
+    <!--
+    
+        SPECIAL/CUSTOM:
+            Customization for David Schmidt / MESVision.
+            Added intermediary tokenization/approval.
+            Removed commentary on request.php
+            Created approve.php
+        
+        DESCRIPTION:
+            This is a sample integration to the Sage Payment Solutions Web Services.
+            The Web Services expose a robust set of gateway functionality, while allowing
+            the integrator to use their own UIs to collect the customer's data.
+        
+        TECHNICAL:
+            This was created on a Linux server running PHP version 5.5.16.
+            Your PHP installation will need SOAP and SimpleXML enabled.
+            Call phpinfo() to see information about your configuration.
+        
+        SUPPORT:
+            I've done my best to add comments throughout these files. That said, it is 
+            not possible to exhaustively anticipate and address every potential scenario 
+            that may arise! Please email sdksupport@sage.com for assistance integrating to 
+            the Web Services, or any other questions involving third-party integrations to the 
+            Sage Payment Solutions gateway. Any code snippets, logs, responses, etc. 
+            that you can provide make troubleshooting much easier, and are appreciated.
+        
+        TERMS OF USE:
+            This sample was created for demonstrative purposes only. Please do not provide
+            these files, their content, Web Service documentation, or any other relevant material 
+            to any parties not directly involved with your integration.
+            
+
+    -->
+
+    <body>
+    
+        <h3>Payment Information:</h3>
+
+        <form method="POST" action="request.php">
+            
+            <label>First Name: <input type="text" name="FirstName" value="Sage"></label><br />
+            <label>Last Name: <input type="text" name="LastName" value="Test"></label><br />
+            <label>Address Line 1: <input type="text" name="AddressLine1" value="123 Main St."></label><br />
+            <label>Address Line 2: <input type="text" name="AddressLine2" value="Suite 1"></label><br />
+            <label>City: <input type="text" name="City" value="Paterson"></label><br />
+            <label>State: <input type="text" name="State" value="NJ"></label><br />
+            <label>Zip: <input type="text" name="Zip" value="07524"></label><br />
+            <label>Email: <input type="email" name="Email" value="test@example.com"></label><br />
+            <label>Telephone: <input type="tel" name="Telephone" value="999-555-1234"></label><br /><br />
+            <label>Order Number: <input type="text" name="Ordernum" value=""></label><br /><br />
+            <label>Amount: <input type="text" name="Amt" value="1.00"></label><br />
+            
+        <h3>CC Information:</h3>    
+            <label>Cardnumber: <input type="text" name="CC" value="4111111111111111"></label><br />
+            <label>Expiration: <input type="text" name="Exp" value="0120"></label><br />
+            <br />
+            <input type="submit" value="Submit" /><br />
+        </form>
+        
+    </body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>SPS Web Services Sample</title>
+    </head>
+
+    <!--
+        DESCRIPTION:
+            This is a sample integration to the Sage Payment Solutions Web Services.
+            The Web Services expose a robust set of gateway functionality, while allowing
+            the integrator to use their own UIs to collect the customer's data.
+        
+        TECHNICAL:
+            This was created on a Linux server running PHP version 5.5.16.
+            Your PHP installation will need SOAP and SimpleXML enabled.
+            Call phpinfo() to see information about your configuration.
+        
+        SUPPORT:
+            I've done my best to add comments throughout these files. That said, it is 
+            not possible to exhaustively anticipate and address every potential scenario 
+            that may arise! Please email sdksupport@sage.com for assistance integrating to 
+            the Web Services, or any other questions involving third-party integrations to the 
+            Sage Payment Solutions gateway. Any code snippets, logs, responses, etc. 
+            that you can provide make troubleshooting much easier, and are appreciated.
+        
+        TERMS OF USE:
+            This sample was created for demonstrative purposes only. Please do not provide
+            these files, their content, Web Service documentation, or any other relevant material 
+            to any parties not directly involved with your integration.
+    -->
+
+    <body>
+    
+        <h3>Payment Information:</h3>
+
+        <form method="POST" action="request.php">
+            <label>Cardnumber: <input type="text" name="CC" value="4111111111111111"></label><br />
+            <label>Expiration: <input type="text" name="Exp" value="0120"></label><br />
+            <br />
+            <input type="submit" value="Submit" /><br />
+        </form>
+        
+    </body>
+</html>

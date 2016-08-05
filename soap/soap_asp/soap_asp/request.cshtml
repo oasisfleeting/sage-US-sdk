@@ -1,0 +1,53 @@
+﻿@using System.Collections.Specialized
+@using System.Collections.Generic
+@using SPS
+@using System.Data
+@using System.Xml.Linq
+
+@{
+    /*
+    In Visual Studio, right-click on your Project and select Add Service Reference. This may be slightly different between different versions/editions.
+    Add the WSDL -- for this example, https://gateway.sagepayments.net/web_services/wsvtextensions/transaction_processing.asmx?WSDL.
+    Give it a name, then hit Go. Visual Studio will automatically create a class with methods corresponding to the available Web Service operations.
+    */
+
+    NameValueCollection PostData = Request.Form;
+    
+    // Instantiate the object...
+    TRANSACTION_PROCESSINGSoapClient SoapClient = new TRANSACTION_PROCESSINGSoapClient();
+    
+    // ... and call the method!
+    DataSet Response = SoapClient.BANKCARD_SALE("111111111111", "X1X1X1X1X1X1", PostData["FirstName"] + " " + PostData["LastName"], PostData["AddressLine1"] + " " + PostData["AddressLine2"],
+                                              PostData["City"], PostData["State"], PostData["Zip"], "USA", PostData["Email"], PostData["CC"], PostData["Exp"], PostData["CVV"], "123", "1",
+                                              "0", "0", "000928", PostData["Telephone"], "999-555-1234", PostData["FirstName"] + " " + PostData["LastName"], PostData["AddressLine1"] + " " + PostData["AddressLine2"],
+                                              PostData["City"], PostData["State"], PostData["Zip"], "USA", "DEMO", "Some Device");
+                                              // The MerchantID and MerchantKey here are a test account of mine. They will work, and you are welcome to use them. However,
+                                              // I strongly suggest you replace it with your own test credentials so you have access to the Virtual Terminal.
+                                              // The ApplicationID here is 'DEMO'; when you're done with development we will certify your integration (it's quick & easy) and provide a production value.
+    // Casting the response to an XML object makes handling the data much easier:
+    XElement Result = XElement.Parse(Response.GetXml());
+    IEnumerable<XElement> ResultData = from node in Result.Descendants()
+                                       select node;
+    
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SPS Web Services Sample</title>
+</head>
+
+<body>
+    <h3>Payment Results:</h3>
+    <!-- We're done! Give your user a result: -->
+    <pre>
+        Thank you for shopping with us!
+        Your transaction was @ResultData.Single(x => x.Name.ToString() == "MESSAGE").Value.
+        Your order number is @ResultData.Single(x => x.Name.ToString() == "ORDER_NUMBER").Value.
+    </pre>
+    <!--
+        FOR SUPPORT: sdksupport@sage.com
+
+    -->
+</body>
+</html>

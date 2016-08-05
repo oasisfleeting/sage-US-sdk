@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>SPS Web Services Sample - ACH</title>
+    </head>
+
+    <!--
+    
+        DESCRIPTION:
+            This is a sample integration to the Sage Payment Solutions Web Services.
+            The Web Services expose a robust set of gateway functionality, while allowing
+            the integrator to use their own UIs to collect the customer's data.
+        
+        TECHNICAL:
+            This was created on a Linux server running PHP version 5.5.16.
+            Your PHP installation will need SOAP and SimpleXML enabled.
+            Call phpinfo() to see information about your configuration.
+        
+        SUPPORT:
+            I've done my best to add comments throughout these files. That said, it is 
+            not possible to exhaustively anticipate and address every potential scenario 
+            that may arise! Please email sdksupport@sage.com for assistance integrating to 
+            the Web Services, or any other questions involving third-party integrations to the 
+            Sage Payment Solutions gateway. Any code snippets, logs, responses, etc. 
+            that you can provide make troubleshooting much easier, and are appreciated.
+        
+        TERMS OF USE:
+            This sample was created for demonstrative purposes only. Please do not provide
+            these files, their content, Web Service documentation, or any other relevant material 
+            to any parties not directly involved with your integration.
+            
+    -->
+
+    <body>
+    
+        <h3>Customer Information:</h3>
+
+        <!--
+            There's nothing particularly interesting happening here -- just a typical HTML form 
+            collecting customer information and passing it on.
+        -->
+
+        <form method="POST" action="request.php">
+            <label>First Name: <input type="text" name="FirstName" value="Joe"></label><br />
+            <label>Middle Name: <input type="text" name="MiddleName" value=""></label><br />
+            <label>Last Name: <input type="text" name="LastName" value="Cuervo"></label><br />
+            <label>Suffix: <input type="text" name="Suffix" value=""></label><br />
+            <label>Address Line 1: <input type="text" name="AddressLine1" value="123 Main St."></label><br />
+            <label>Address Line 2: <input type="text" name="AddressLine2" value="Suite 1"></label><br />
+            <label>City: <input type="text" name="City" value="Paterson"></label><br />
+            <label>State: <input type="text" name="State" value="NJ"></label><br />
+            <label>Zip: <input type="text" name="Zip" value="07524"></label><br />
+            <label>Email: <input type="email" name="Email" value="test@example.com"></label><br />
+            <label>Telephone: <input type="tel" name="Telephone" value="999-555-1234"></label><br /><br />
+        <h3>ACH Payment Information:</h3>
+            <label>Routing #: <input type="text" name="RTE" value="056008849"></label><br />
+            <label>Account #: <input type="text" name="ACCT" value="12345678901234"></label><br />
+            <input type="submit" value="Submit" /><br />
+        </form>
+        
+    </body>
+</html>

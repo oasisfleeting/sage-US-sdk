@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>SPS REST API Sample</title>
+</head>
+
+<!--
+
+    DESCRIPTION:
+        This is a sample integration to the Sage Payment Solutions REST API.
+        The API exposes a set of gateway functionality, while allowing
+        the integrator to use their own UIs to collect the customer's data.
+
+    TECHNICAL:
+        .NET version 4.5
+        Razor version 3
+
+    SUPPORT:
+        I've done my best to add comments throughout these files. That said, it is 
+        not possible to exhaustively anticipate and address every potential scenario 
+        that may arise! Please email sdksupport@sage.com for assistance integrating to 
+        the REST API, or any other questions involving third-party integrations to the 
+        Sage Payment Solutions gateway. Any code snippets, logs, responses, etc. 
+        that you can provide make troubleshooting much easier, and are appreciated.
+
+    TERMS OF USE:
+        This sample was created for demonstrative purposes only. Please do not provide
+        these files, their content, API documentation, or any other relevant material 
+        to any parties not directly involved with your integration.
+
+    ABOUT ME:
+        Hi! I'm Majid Razvi, an Integration Consultant at Sage Payment Solutions.
+        You can reach me by email at majid.razvi@sage.com, or on LinkedIn at
+        https://www.linkedin.com/pub/majid-razvi/37/aa7/129. Please don't hesitate
+        to contact me -- I especially appreciate feedback on my code, but I'm also
+        delighted to talk VCU Basketball or nerd out about Star Trek all. day. long.
+
+-->
+
+<body>
+
+    <h3>Billing Information:</h3>
+
+    <!--
+        There's nothing particularly interesting happening here -- just a typical HTML form
+        collecting customer information and passing it on.
+    -->
+
+    <form method="POST" action="request.cshtml">
+        <label>First Name: <input type="text" name="FirstName" value="Jean Luc"></label><br />
+        <label>Last Name: <input type="text" name="LastName" value="Picard"></label><br />
+        <label>Address Line 1: <input type="text" name="AddressLine1" value="Starfleet Academy"></label><br />
+        <label>Address Line 2: <input type="text" name="AddressLine2" value="Room 1"></label><br />
+        <label>City: <input type="text" name="City" value="San Francisco"></label><br />
+        <label>State: <input type="text" name="State" value="CA"></label><br />
+        <label>Zip: <input type="text" name="Zip" value="94952"></label><br />
+        <label>Email: <input type="email" name="Email" value="jlpicard@example.com"></label><br />
+        <label>Telephone: <input type="tel" name="Telephone" value="999-555-1234"></label><br /><br />
+    <h3>Credit Card Information:</h3>
+        <label>Cardnumber: <input type="text" name="CC" value="4111111111111111"></label><br />
+        <label>Expiration: <input type="text" name="Exp" value="1220"></label><br />
+        <label>CVV: <input type="text" name="CVV" value="123"></label><br /><br />
+        <input type="submit" value="Submit" /><br />
+    </form>
+
+</body>
+</html>

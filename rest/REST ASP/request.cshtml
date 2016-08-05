@@ -1,0 +1,97 @@
+﻿@using System.Collections.Specialized
+@using System.Security.Cryptography
+@using System.Text
+@using System.Xml.Linq
+
+@{
+    NameValueCollection PostData = Request.Form;
+    
+    // The gateway credentials that I use correspond to test account of mine. They will work, and you are
+    // welcome to use them. However, I strongly suggest you replace it with your own test credentials so
+    // you have access to the Virtual Terminal.
+    string M_ID = "111111111111";
+    
+    // First, we're going to gather all our data from the previous page and plug it into an XML template.
+    // You can also send/receive JSON by setting the appropriate headers. (Content-Type & Accept)
+    // This is a minimalistic example; please refer to the documentation/WSDLs for more details.
+    
+    string transaction = @"<RetailTransactionRequest xmlns:i='http://www.w3.org/2001/XMLSchema-instance' xmlns='http://schemas.datacontract.org/2004/07/wapiGateway.Models'>
+                            <C_ADDRESS>" + PostData["AddressLine1"] + " " + PostData["AddressLine2"] + @"</C_ADDRESS>
+                            <C_CARDNUMBER>" + PostData["CC"] + @"</C_CARDNUMBER>
+                            <C_EXP>" + PostData["Exp"] + @"</C_EXP>
+                            <C_ZIP>" + PostData["Zip"] + @"</C_ZIP>
+                            <T_AMT>1</T_AMT>"
+                            // The ApplicationID here is 'DEMO'; when you're done with development we will certify your integration it's quick & easy)and provide a production value.
+                            +@"<T_APPLICATION_ID>DEMO</T_APPLICATION_ID>
+                            <T_CODE>1</T_CODE>
+                            <T_UTI>" + DateTime.Now + @"</T_UTI>
+                        </RetailTransactionRequest>";
+
+    /*
+    This request will be authenticated via an HMAC.
+    In a production environment:
+        - your verb and URL may differ between requests.
+        - for GET/DELETE requests, you won't have a request body.
+    */
+    string M_KEY = "N3H5G9X7Q3Q5";
+    string verb = "POST";
+    string URL = "https://gateway.sagepayments.net/web_services/gateway/api/retailtransactions";
+    string CombinedString = verb + URL + transaction;
+    
+    byte[] CombinedRequestData = UTF8Encoding.UTF8.GetBytes(CombinedString);
+    HMACSHA1 Hash = new HMACSHA1(UTF8Encoding.UTF8.GetBytes(M_KEY));
+    string HMAC = Convert.ToBase64String(Hash.ComputeHash(CombinedRequestData));
+
+    
+    // Now we're going to make the request:
+    WebRequest request = WebRequest.Create(URL);
+    request.Method = verb;
+    request.ContentType = "application/xml";
+    request.Headers.Add("Authentication", M_ID + ":" + HMAC);
+    
+    Stream requestStream = request.GetRequestStream();
+    requestStream.Write(UTF8Encoding.UTF8.GetBytes(transaction), 0, transaction.Length);
+    requestStream.Close();
+    
+    WebResponse Response = request.GetResponse();
+    Stream responseStream = Response.GetResponseStream();
+    StreamReader reader = new StreamReader(responseStream);
+    
+    // Casting the response to an XML object makes handling the data much easier:
+    XElement Result = XElement.Parse(reader.ReadToEnd());
+    IEnumerable<XElement> ResultData = from node in Result.Descendants()
+                                       select node;
+    
+    responseStream.Close();
+    reader.Close();
+    
+    // [Some database calls and/or logging here, probably.]
+
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SPS REST API Sample</title>
+</head>
+
+<body>
+    <h3>Payment Results:</h3>
+    <!-- We're done! Give your user a result: -->
+    <pre>
+        Thank you for shopping with us!
+        Your transaction was @ResultData.Single(x => x.Name.ToString() == "{http://schemas.datacontract.org/2004/07/wapiGateway.Models}Message").Value.
+        Your order number is @ResultData.Single(x => x.Name.ToString() == "{http://schemas.datacontract.org/2004/07/wapiGateway.Models}OrderNumber").Value.
+    </pre>
+    <!--
+        FOR SUPPORT: sdksupport@sage.com
+
+        Majid Razvi, September 2014
+        Integration Consultant, Sage Payment Solutions
+        majid.razvi@sage.com
+        https://www.linkedin.com/pub/majid-razvi/37/aa7/129
+
+        Go Rams!
+    -->
+</body>
+</html>
